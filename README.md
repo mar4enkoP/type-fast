@@ -2,6 +2,19 @@
 
 Touch typing simulator on TypeScript, without frameworks.
 
+## 🏗️ Architecture
+
+Hexagonal architecture (Ports & Adapters): the business logic (WPM/accuracy calculation) is independent of the DOM. UI components (`TabsComponent` and others) are thin adapters that render the state and pass events to the domain.
+
+## ✅ Roadmap
+
+- [x] Static tab navigation
+- [ ] Touch-typing engine (input capture, WPM/CPM, accuracy)
+- [ ] Virtual keyboard
+- [ ] Animations
+- [ ] Top menu (theme/language)
+- [ ] Tests (Vitest, Playwright)
+
 ## 🚀 Getting Started
 
 ### Prerequisites
