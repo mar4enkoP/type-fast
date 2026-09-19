@@ -1,78 +1,100 @@
 /* ── Reset / base ─────────────────────────────────────────────── */
 
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 body {
-  margin: 0;
-  min-height: 100vh;
-  display: grid;
-  place-items: center;
-  background: #f4f4f0;
-  font-family: Inter, sans-serif;
+    margin: 0;
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    background: #f4f4f0;
+    font-family: Inter, sans-serif;
 }
 
 /* ── Layout ───────────────────────────────────────────────────── */
 
 .tabs-demo {
-  width: 100%;
-  max-width: 1020px;
-  padding: 0 clamp(2rem, 8vw, 5rem);
+    width: 100%;
+    max-width: 1020px;
+    padding: 0 clamp(2rem, 8vw, 5rem);
 }
 
 /* ── Tabs navigation ──────────────────────────────────────────── */
 
 .tabs {
-  position: absolute;
-  width: 100%;
-  bottom: 20px;
-  left: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
+    position: absolute;
+    width: 100%;
+    bottom: 20px;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
 }
 
 .tab {
-  border: none;
-  border-radius: 999px;
-  padding: 10px 16px;
-  background: rgba(0, 0, 0, 0.08);
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: 500;
-  transition: background 0.2s ease;
+    border: none;
+    border-radius: 999px;
+    padding: 10px 16px;
+    background: rgba(0, 0, 0, 0.08);
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background 0.2s ease;
 }
 
 .tab.active {
-  background: #111;
-  color: #fff;
+    background: #111;
+    color: #fff;
 }
 
 .tab:hover {
-  background: rgba(0, 0, 0, 0.16);
+    background: rgba(0, 0, 0, 0.16);
 }
 
 .tab.active:hover {
-  background: #111;
+    background: #111;
 }
 
 /* ── Content panels ───────────────────────────────────────────── */
 
 .content-wrapper {
-  position: relative;
+    position: relative;
+    display: grid;
 }
 
 .role-content {
-  display: none;
-  text-align: center;
-  font-size: clamp(2rem, 3vw, 3rem);
-  font-weight: 600;
-  line-height: 1.15;
+    text-align: center;
+    font-size: clamp(2rem, 3vw, 3rem);
+    font-weight: 600;
+    line-height: 1.15;
+    grid-column: 1;
+    grid-row: 1;
 }
 
 .role-content.active {
-  display: block;
+    display: block;
+}
+
+.split-line {
+    overflow: hidden;
+    display: block;
+}
+
+.split-line-value {
+    display: block;
+}
+
+.role-content {
+    overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .split-line {
+        animation: none !important;
+        transition: none !important;
+    }
 }
