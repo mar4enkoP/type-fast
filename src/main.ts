@@ -1,6 +1,6 @@
 import './styles/global.css';
-import { TabsComponent } from './tabs/TabsComponent';
-import { type TabItem } from './tabs/tabs.types';
+import { TabsComponent } from './tabs/TabsComponent.ts';
+import { type TabItem } from './tabs/tabs.types.ts';
 
 const TAB_CONTENT: TabItem[] = [
   {
