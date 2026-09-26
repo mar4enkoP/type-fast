@@ -78,13 +78,13 @@ export class TabsComponent {
    * Переключает активный таб
    */
   private setActive(index: number): void {
+    this.tabsEl.querySelectorAll('.tab').forEach((btn, i) => {
+      btn.classList.toggle('active', i === index);
+    });
     if (this.isAnimating) {
       this.queuedIndex = index;
       return;
     }
-    this.tabsEl.querySelectorAll('.tab').forEach((btn, i) => {
-      btn.classList.toggle('active', i === index);
-    });
     if (index === this.activeIndex) {
       return;
     }
@@ -119,9 +119,6 @@ export class TabsComponent {
     if (!lastAnimation) return;
     void lastAnimation.finished.then(() => {
       this.activeIndex = nextIndex;
-      this.tabsEl.querySelectorAll('.tab').forEach((btn, i) => {
-        btn.classList.toggle('active', i === nextIndex);
-      });
       this.isAnimating = false;
       if (this.queuedIndex !== null) {
         const queuedIndex = this.queuedIndex;
