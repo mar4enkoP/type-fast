@@ -1,6 +1,11 @@
 import { type TabItem } from './tabs.types.ts';
 import { splitLines } from '../lib/text-split/splitLines/splitLines.ts';
-import { DURATION_MS, OVERLAP_MS, STAGGER_MS } from '../lib/animation/constants.ts';
+import {
+  DURATION_MS,
+  OVERLAP_MS,
+  STAGGER_MS,
+  Y_OFFSET_PERCENT,
+} from '../lib/animation/constants.ts';
 
 export class TabsComponent {
   private readonly tabsEl: HTMLElement;
@@ -40,7 +45,7 @@ export class TabsComponent {
         if (index === 0) {
           line.style.transform = 'translateY(0)';
         } else {
-          line.style.transform = 'translateY(150%)';
+          line.style.transform = `translateY(${String(Y_OFFSET_PERCENT)}%)`;
         }
       });
     });
@@ -96,18 +101,27 @@ export class TabsComponent {
     const currentLines = this.getSplit(this.activeIndex).lines;
     const nextLines = this.getSplit(nextIndex).lines;
     currentLines.forEach((line, i) => {
-      line.animate([{ transform: 'translateY(0%)' }, { transform: 'translateY(150%)' }], {
-        duration: DURATION_MS,
-        delay: i * STAGGER_MS,
-        fill: 'forwards',
-        easing: 'ease-in',
-      });
+      line.animate(
+        [
+          { transform: 'translateY(0%)' },
+          { transform: `translateY(${String(Y_OFFSET_PERCENT)}%)` },
+        ],
+        {
+          duration: DURATION_MS,
+          delay: i * STAGGER_MS,
+          fill: 'forwards',
+          easing: 'ease-in',
+        }
+      );
     });
     const totalOutDuration = DURATION_MS + (currentLines.length - 1) * STAGGER_MS;
     let lastAnimation: Animation | undefined;
     nextLines.forEach((line, i) => {
       lastAnimation = line.animate(
-        [{ transform: 'translateY(150%)' }, { transform: 'translateY(0%)' }],
+        [
+          { transform: `translateY(${String(Y_OFFSET_PERCENT)}%)` },
+          { transform: 'translateY(0%)' },
+        ],
         {
           duration: DURATION_MS,
           delay: totalOutDuration - OVERLAP_MS + i * STAGGER_MS,
