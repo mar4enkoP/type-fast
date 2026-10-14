@@ -5,6 +5,7 @@ export function registerKeystroke(
   char: string,
   timestamp: number
 ): TypingSession {
+  if (char.length !== 1) return session;
   const typedCharIndex = session.typedChars.filter((typedChar) => typedChar.correct).length;
   const expected = session.targetText[typedCharIndex];
   if (expected === undefined) return session;

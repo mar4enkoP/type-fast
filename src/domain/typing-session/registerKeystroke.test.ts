@@ -119,3 +119,41 @@ test('should_ignore_input_after_session_completion', () => {
   const result2 = registerKeystroke(result, 'X', 2);
   expect(result2).toEqual(result);
 });
+
+test('should_ignore_empty_input', () => {
+  const session = {
+    targetText: 'H',
+    typedChars: [],
+    startedAt: null,
+    completedAt: null,
+  };
+  const result = registerKeystroke(session, '', 1);
+  expect(result).toEqual(session);
+});
+
+test('should_ignore_multiple_characters', () => {
+  const session = {
+    targetText: 'He',
+    typedChars: [],
+    startedAt: null,
+    completedAt: null,
+  };
+  const result = registerKeystroke(session, 'He', 1);
+  expect(result).toEqual(session);
+});
+
+test('should_accept_space_as_valid_input', () => {
+  const session = {
+    targetText: ' ',
+    typedChars: [],
+    startedAt: null,
+    completedAt: null,
+  };
+  const result = registerKeystroke(session, ' ', 1);
+  expect(result).toEqual({
+    ...session,
+    startedAt: 1,
+    completedAt: 1,
+    typedChars: [{ expected: ' ', actual: ' ', correct: true, timestamp: 1 }],
+  });
+});
